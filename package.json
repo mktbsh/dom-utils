@@ -1,0 +1,31 @@
+{
+  "name": "@mktbsh/dom-utils",
+  "version": "0.1.0",
+  "description": "",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["dist", "package.json"],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "mktbsh",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.7",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
