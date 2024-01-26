@@ -1,7 +1,7 @@
 {
   "name": "@mktbsh/dom-utils",
   "version": "0.1.0",
-  "description": "",
+  "description": "making DOM manipulation a bit more convenient",
   "publishConfig": {
     "access": "public"
   },
@@ -20,7 +20,7 @@
     "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["dom"],
   "author": "mktbsh",
   "license": "MIT",
   "devDependencies": {
