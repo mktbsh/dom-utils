@@ -1,3 +1,1 @@
-
-
-export const foo = 43;
+export * from './canvas'
