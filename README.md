@@ -33,11 +33,17 @@ pnpm install @mktbsh/dom-utils
 ## Examples
 
 ```javascript
-import Component from 'my-project'
+import { imageElementToBlob } from '@mktbsh/dom-utils'
 
-function App() {
-  return <Component />
+
+async function main() {
+  const img = document.querySelector('img');
+
+  const blob = await imageElementToBlob(img);
+
+  console.log(blob.size);
 }
+
 ```
 
 
