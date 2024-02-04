@@ -1,6 +1,6 @@
 {
   "name": "@mktbsh/dom-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "making DOM manipulation a bit more convenient",
   "publishConfig": {
     "access": "public"
