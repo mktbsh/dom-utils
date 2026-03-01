@@ -2,6 +2,7 @@
   "name": "@mktbsh/dom-utils",
   "version": "0.2.3",
   "description": "making DOM manipulation a bit more convenient",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -11,17 +12,23 @@
   ],
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "main": "index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "scripts": {
-    "build": "tsup",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsdown",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "check": "@biomejs/biome check --apply ./src/**/*.ts"
   },
   "keywords": [
@@ -32,7 +39,10 @@
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
     "@types/node": "^20.11.7",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "@vitest/coverage-v8": "^3.0.0",
+    "happy-dom": "^16.0.0",
+    "tsdown": "latest",
+    "typescript": "^5.3.3",
+    "vitest": "^3.0.0"
   }
 }
