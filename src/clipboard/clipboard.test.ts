@@ -40,7 +40,9 @@ describe("copyToClipboard", () => {
 			writable: true,
 		});
 
-		await expect(copyToClipboard("fail")).rejects.toThrow("copyToClipboard: execCommand failed");
+		await expect(copyToClipboard("fail")).rejects.toThrow(
+			"copyToClipboard: execCommand failed",
+		);
 	});
 });
 
@@ -63,6 +65,8 @@ describe("readFromClipboard", () => {
 	it("throws when clipboard API is not available", async () => {
 		vi.stubGlobal("navigator", { clipboard: undefined });
 
-		await expect(readFromClipboard()).rejects.toThrow("readFromClipboard: Clipboard API not available");
+		await expect(readFromClipboard()).rejects.toThrow(
+			"readFromClipboard: Clipboard API not available",
+		);
 	});
 });

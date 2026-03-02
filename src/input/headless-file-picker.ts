@@ -3,7 +3,10 @@ type HeadlessFilePickerOptions = {
 	multiple: HTMLInputElement["multiple"];
 };
 
-export async function headlessFilePicker({ accept = "*", multiple = false }: HeadlessFilePickerOptions) {
+export async function headlessFilePicker({
+	accept = "*",
+	multiple = false,
+}: HeadlessFilePickerOptions) {
 	return new Promise<FileList>((resolve, reject) => {
 		const input = document.createElement("input");
 		input.type = "file";

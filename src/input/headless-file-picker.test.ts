@@ -25,7 +25,10 @@ describe("headlessFilePicker", () => {
 		const file = new File(["content"], "test.txt", { type: "text/plain" });
 		const dataTransfer = new DataTransfer();
 		dataTransfer.items.add(file);
-		Object.defineProperty(inputElement, "files", { value: dataTransfer.files, configurable: true });
+		Object.defineProperty(inputElement, "files", {
+			value: dataTransfer.files,
+			configurable: true,
+		});
 
 		inputElement.dispatchEvent(new Event("change"));
 
@@ -39,7 +42,10 @@ describe("headlessFilePicker", () => {
 		const promise = headlessFilePicker({ accept: "*", multiple: true });
 
 		// Simulate change event with no files
-		Object.defineProperty(inputElement, "files", { value: null, configurable: true });
+		Object.defineProperty(inputElement, "files", {
+			value: null,
+			configurable: true,
+		});
 		inputElement.dispatchEvent(new Event("change"));
 
 		await expect(promise).rejects.toBe("No files selected");

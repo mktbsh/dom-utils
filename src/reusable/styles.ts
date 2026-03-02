@@ -1,3 +1,1 @@
-
-
-export const SIZE_FULL = "100%"
+export const SIZE_FULL = "100%";

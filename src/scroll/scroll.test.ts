@@ -29,8 +29,14 @@ describe("getScrollPosition", () => {
 	});
 
 	it("returns the current scroll position from window", () => {
-		Object.defineProperty(window, "scrollX", { value: 100, configurable: true });
-		Object.defineProperty(window, "scrollY", { value: 200, configurable: true });
+		Object.defineProperty(window, "scrollX", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(window, "scrollY", {
+			value: 200,
+			configurable: true,
+		});
 		const pos = getScrollPosition();
 		expect(pos).toEqual({ x: 100, y: 200 });
 	});
@@ -47,10 +53,22 @@ describe("isScrollable", () => {
 			overflowY: "auto",
 			overflowX: "visible",
 		} as CSSStyleDeclaration);
-		Object.defineProperty(el, "scrollHeight", { value: 500, configurable: true });
-		Object.defineProperty(el, "clientHeight", { value: 200, configurable: true });
-		Object.defineProperty(el, "scrollWidth", { value: 100, configurable: true });
-		Object.defineProperty(el, "clientWidth", { value: 100, configurable: true });
+		Object.defineProperty(el, "scrollHeight", {
+			value: 500,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientHeight", {
+			value: 200,
+			configurable: true,
+		});
+		Object.defineProperty(el, "scrollWidth", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientWidth", {
+			value: 100,
+			configurable: true,
+		});
 
 		expect(isScrollable(el)).toBe(true);
 	});
@@ -61,10 +79,22 @@ describe("isScrollable", () => {
 			overflowY: "visible",
 			overflowX: "scroll",
 		} as CSSStyleDeclaration);
-		Object.defineProperty(el, "scrollHeight", { value: 100, configurable: true });
-		Object.defineProperty(el, "clientHeight", { value: 100, configurable: true });
-		Object.defineProperty(el, "scrollWidth", { value: 500, configurable: true });
-		Object.defineProperty(el, "clientWidth", { value: 200, configurable: true });
+		Object.defineProperty(el, "scrollHeight", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientHeight", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "scrollWidth", {
+			value: 500,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientWidth", {
+			value: 200,
+			configurable: true,
+		});
 
 		expect(isScrollable(el)).toBe(true);
 	});
@@ -75,10 +105,22 @@ describe("isScrollable", () => {
 			overflowY: "visible",
 			overflowX: "visible",
 		} as CSSStyleDeclaration);
-		Object.defineProperty(el, "scrollHeight", { value: 100, configurable: true });
-		Object.defineProperty(el, "clientHeight", { value: 100, configurable: true });
-		Object.defineProperty(el, "scrollWidth", { value: 100, configurable: true });
-		Object.defineProperty(el, "clientWidth", { value: 100, configurable: true });
+		Object.defineProperty(el, "scrollHeight", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientHeight", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "scrollWidth", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientWidth", {
+			value: 100,
+			configurable: true,
+		});
 
 		expect(isScrollable(el)).toBe(false);
 	});
@@ -89,10 +131,22 @@ describe("isScrollable", () => {
 			overflowY: "auto",
 			overflowX: "auto",
 		} as CSSStyleDeclaration);
-		Object.defineProperty(el, "scrollHeight", { value: 100, configurable: true });
-		Object.defineProperty(el, "clientHeight", { value: 100, configurable: true });
-		Object.defineProperty(el, "scrollWidth", { value: 100, configurable: true });
-		Object.defineProperty(el, "clientWidth", { value: 100, configurable: true });
+		Object.defineProperty(el, "scrollHeight", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientHeight", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "scrollWidth", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(el, "clientWidth", {
+			value: 100,
+			configurable: true,
+		});
 
 		expect(isScrollable(el)).toBe(false);
 	});

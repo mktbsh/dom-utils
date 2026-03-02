@@ -13,7 +13,10 @@ describe("onElementResize", () => {
 		const disconnectSpy = vi.fn();
 		vi.stubGlobal(
 			"ResizeObserver",
-			vi.fn().mockImplementation(() => ({ observe: observeSpy, disconnect: disconnectSpy })),
+			vi.fn().mockImplementation(() => ({
+				observe: observeSpy,
+				disconnect: disconnectSpy,
+			})),
 		);
 
 		const el = document.createElement("div");
@@ -25,20 +28,26 @@ describe("onElementResize", () => {
 
 	it("calls callback with each resize entry", () => {
 		const callback = vi.fn();
-		let capturedCallback: ((entries: ResizeObserverEntry[]) => void) | undefined;
+		let capturedCallback:
+			| ((entries: ResizeObserverEntry[]) => void)
+			| undefined;
 
 		vi.stubGlobal(
 			"ResizeObserver",
-			vi.fn().mockImplementation((cb: (entries: ResizeObserverEntry[]) => void) => {
-				capturedCallback = cb;
-				return { observe: vi.fn(), disconnect: vi.fn() };
-			}),
+			vi
+				.fn()
+				.mockImplementation((cb: (entries: ResizeObserverEntry[]) => void) => {
+					capturedCallback = cb;
+					return { observe: vi.fn(), disconnect: vi.fn() };
+				}),
 		);
 
 		const el = document.createElement("div");
 		onElementResize(el, callback);
 
-		const entry = { contentRect: { width: 100, height: 100 } } as ResizeObserverEntry;
+		const entry = {
+			contentRect: { width: 100, height: 100 },
+		} as ResizeObserverEntry;
 		capturedCallback?.([entry]);
 
 		expect(callback).toHaveBeenCalledWith(entry);
@@ -48,7 +57,10 @@ describe("onElementResize", () => {
 		const disconnectSpy = vi.fn();
 		vi.stubGlobal(
 			"ResizeObserver",
-			vi.fn().mockImplementation(() => ({ observe: vi.fn(), disconnect: disconnectSpy })),
+			vi.fn().mockImplementation(() => ({
+				observe: vi.fn(),
+				disconnect: disconnectSpy,
+			})),
 		);
 
 		const el = document.createElement("div");
@@ -108,7 +120,9 @@ describe("waitForElement", () => {
 	});
 
 	it("rejects after timeout if element is not found", async () => {
-		await expect(waitForElement(".never-exists", { timeout: 50 })).rejects.toThrow(
+		await expect(
+			waitForElement(".never-exists", { timeout: 50 }),
+		).rejects.toThrow(
 			'waitForElement: selector ".never-exists" timed out after 50ms',
 		);
 	});

@@ -1,8 +1,11 @@
 import { ctx2d } from "./_internal";
 import { createCanvasElement } from "./create";
-import { ImageOptions, ResizeOption } from "./types";
+import type { ImageOptions, ResizeOption } from "./types";
 
-export async function imageElementToBlob(img: HTMLImageElement, options?: ImageOptions) {
+export async function imageElementToBlob(
+	img: HTMLImageElement,
+	options?: ImageOptions,
+) {
 	const canvas = createCanvasElement(img);
 	return canvasToImage(canvas, "blob", options);
 }
@@ -23,7 +26,10 @@ export async function canvasToImage<T extends "blob" | "dataURL">(
 		try {
 			if (output === "blob") {
 				canvas.toBlob(
-					(b) => (b ? resolve(b as T extends "blob" ? Blob : string) : reject("Failed to convert canvas to blob")),
+					(b) =>
+						b
+							? resolve(b as T extends "blob" ? Blob : string)
+							: reject("Failed to convert canvas to blob"),
 					type,
 					quality,
 				);
@@ -54,5 +60,15 @@ function canvasResize(canvas: HTMLCanvasElement, resize: ResizeOption): void {
 	canvas.height = resizedHeight;
 	canvas.width = resizedWidth;
 
-	ctx2d(canvas)?.drawImage(canvas, 0, 0, oldWidth, oldHeight, 0, 0, resizedWidth, resizedHeight);
+	ctx2d(canvas)?.drawImage(
+		canvas,
+		0,
+		0,
+		oldWidth,
+		oldHeight,
+		0,
+		0,
+		resizedWidth,
+		resizedHeight,
+	);
 }

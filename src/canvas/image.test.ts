@@ -17,7 +17,9 @@ function createMockCanvas(overrides?: {
 		canvas.toDataURL = overrides.toDataURL;
 	}
 	if (overrides?.getContext) {
-		vi.spyOn(canvas, "getContext").mockImplementation(overrides.getContext as typeof canvas.getContext);
+		vi.spyOn(canvas, "getContext").mockImplementation(
+			overrides.getContext as typeof canvas.getContext,
+		);
 	}
 	return canvas;
 }
@@ -42,7 +44,9 @@ describe("canvasToImage", () => {
 			toBlob: (cb) => cb(null),
 		});
 
-		await expect(canvasToImage(canvas, "blob")).rejects.toBe("Failed to convert canvas to blob");
+		await expect(canvasToImage(canvas, "blob")).rejects.toBe(
+			"Failed to convert canvas to blob",
+		);
 	});
 
 	it("resolves with a data URL when output is dataURL", async () => {
@@ -60,7 +64,11 @@ describe("canvasToImage", () => {
 		const canvas = createMockCanvas({ toBlob: toBlobSpy });
 
 		await canvasToImage(canvas, "blob", { type: "jpeg", quality: 0.8 });
-		expect(toBlobSpy).toHaveBeenCalledWith(expect.any(Function), "image/jpeg", 0.8);
+		expect(toBlobSpy).toHaveBeenCalledWith(
+			expect.any(Function),
+			"image/jpeg",
+			0.8,
+		);
 	});
 
 	it("passes type and quality options to toDataURL", async () => {
@@ -74,7 +82,9 @@ describe("canvasToImage", () => {
 	it("applies width resize option", async () => {
 		const mockBlob = new Blob([], { type: "image/png" });
 		const drawSpy = vi.fn();
-		const ctxMock = { drawImage: drawSpy } as unknown as CanvasRenderingContext2D;
+		const ctxMock = {
+			drawImage: drawSpy,
+		} as unknown as CanvasRenderingContext2D;
 		const canvas = createMockCanvas({
 			toBlob: (cb) => cb(mockBlob),
 			getContext: () => ctxMock,
@@ -82,7 +92,9 @@ describe("canvasToImage", () => {
 		canvas.width = 200;
 		canvas.height = 100;
 
-		await canvasToImage(canvas, "blob", { resize: { dimension: "width", size: 100 } });
+		await canvasToImage(canvas, "blob", {
+			resize: { dimension: "width", size: 100 },
+		});
 		// ratio = 200/100 = 2; resizedWidth = 100, resizedHeight = 100/2 = 50
 		expect(canvas.width).toBe(100);
 		expect(canvas.height).toBe(50);
@@ -91,7 +103,9 @@ describe("canvasToImage", () => {
 	it("applies height resize option", async () => {
 		const mockBlob = new Blob([], { type: "image/png" });
 		const drawSpy = vi.fn();
-		const ctxMock = { drawImage: drawSpy } as unknown as CanvasRenderingContext2D;
+		const ctxMock = {
+			drawImage: drawSpy,
+		} as unknown as CanvasRenderingContext2D;
 		const canvas = createMockCanvas({
 			toBlob: (cb) => cb(mockBlob),
 			getContext: () => ctxMock,
@@ -99,7 +113,9 @@ describe("canvasToImage", () => {
 		canvas.width = 100;
 		canvas.height = 200;
 
-		await canvasToImage(canvas, "blob", { resize: { dimension: "height", size: 100 } });
+		await canvasToImage(canvas, "blob", {
+			resize: { dimension: "height", size: 100 },
+		});
 		// ratio = 200/100 = 2; resizedHeight = 100, resizedWidth = 100/2 = 50
 		expect(canvas.height).toBe(100);
 		expect(canvas.width).toBe(50);
@@ -123,11 +139,19 @@ describe("imageElementToBlob", () => {
 
 	it("converts an img element to a Blob", async () => {
 		const img = document.createElement("img");
-		Object.defineProperty(img, "naturalWidth", { value: 100, configurable: true });
-		Object.defineProperty(img, "naturalHeight", { value: 100, configurable: true });
+		Object.defineProperty(img, "naturalWidth", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(img, "naturalHeight", {
+			value: 100,
+			configurable: true,
+		});
 
 		const mockBlob = new Blob(["img"], { type: "image/png" });
-		vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation((cb) => cb(mockBlob));
+		vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation((cb) =>
+			cb(mockBlob),
+		);
 		vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
 			drawImage: vi.fn(),
 		} as unknown as CanvasRenderingContext2D);

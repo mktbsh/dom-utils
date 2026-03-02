@@ -1,4 +1,6 @@
-export function onNetworkChange(callback: (online: boolean) => void): () => void {
+export function onNetworkChange(
+	callback: (online: boolean) => void,
+): () => void {
 	const onOnline = () => callback(true);
 	const onOffline = () => callback(false);
 	window.addEventListener("online", onOnline);

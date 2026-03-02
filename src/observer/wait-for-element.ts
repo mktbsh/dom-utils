@@ -1,12 +1,14 @@
-import { WaitForElementOptions } from "./types";
+import type { WaitForElementOptions } from "./types";
 
-export function waitForElement(selector: string, options?: WaitForElementOptions): Promise<Element> {
+export function waitForElement(
+	selector: string,
+	options?: WaitForElementOptions,
+): Promise<Element> {
 	return new Promise((resolve, reject) => {
 		const root = options?.root ?? document.body;
 		const existing = root.querySelector(selector);
 		if (existing) {
-			resolve(existing);
-			return;
+			return resolve(existing);
 		}
 
 		let timer: ReturnType<typeof setTimeout> | undefined;
@@ -22,7 +24,11 @@ export function waitForElement(selector: string, options?: WaitForElementOptions
 		if (options?.timeout !== undefined) {
 			timer = setTimeout(() => {
 				observer.disconnect();
-				reject(new Error(`waitForElement: selector "${selector}" timed out after ${options.timeout}ms`));
+				reject(
+					new Error(
+						`waitForElement: selector "${selector}" timed out after ${options.timeout}ms`,
+					),
+				);
 			}, options.timeout);
 		}
 

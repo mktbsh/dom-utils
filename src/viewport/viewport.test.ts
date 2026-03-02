@@ -20,8 +20,14 @@ describe("isInViewport", () => {
 			y: 10,
 			toJSON: () => {},
 		});
-		Object.defineProperty(window, "innerHeight", { value: 768, configurable: true });
-		Object.defineProperty(window, "innerWidth", { value: 1024, configurable: true });
+		Object.defineProperty(window, "innerHeight", {
+			value: 768,
+			configurable: true,
+		});
+		Object.defineProperty(window, "innerWidth", {
+			value: 1024,
+			configurable: true,
+		});
 
 		expect(isInViewport(el)).toBe(true);
 	});
@@ -44,7 +50,10 @@ describe("isInViewport", () => {
 
 	it("returns false when element is below the viewport", () => {
 		const el = document.createElement("div");
-		Object.defineProperty(window, "innerHeight", { value: 768, configurable: true });
+		Object.defineProperty(window, "innerHeight", {
+			value: 768,
+			configurable: true,
+		});
 		vi.spyOn(el, "getBoundingClientRect").mockReturnValue({
 			top: 800,
 			bottom: 900,
@@ -61,7 +70,10 @@ describe("isInViewport", () => {
 
 	it("returns false when element is to the left of the viewport", () => {
 		const el = document.createElement("div");
-		Object.defineProperty(window, "innerWidth", { value: 1024, configurable: true });
+		Object.defineProperty(window, "innerWidth", {
+			value: 1024,
+			configurable: true,
+		});
 		vi.spyOn(el, "getBoundingClientRect").mockReturnValue({
 			top: 10,
 			bottom: 100,
@@ -78,7 +90,10 @@ describe("isInViewport", () => {
 
 	it("returns false when element is to the right of the viewport", () => {
 		const el = document.createElement("div");
-		Object.defineProperty(window, "innerWidth", { value: 1024, configurable: true });
+		Object.defineProperty(window, "innerWidth", {
+			value: 1024,
+			configurable: true,
+		});
 		vi.spyOn(el, "getBoundingClientRect").mockReturnValue({
 			top: 10,
 			bottom: 100,
@@ -104,7 +119,10 @@ describe("onIntersection", () => {
 		const disconnectSpy = vi.fn();
 		vi.stubGlobal(
 			"IntersectionObserver",
-			vi.fn().mockImplementation(() => ({ observe: observeSpy, disconnect: disconnectSpy })),
+			vi.fn().mockImplementation(() => ({
+				observe: observeSpy,
+				disconnect: disconnectSpy,
+			})),
 		);
 
 		const el = document.createElement("div");
@@ -118,14 +136,20 @@ describe("onIntersection", () => {
 
 	it("calls callback with each entry when intersection changes", () => {
 		const callback = vi.fn();
-		let capturedCallback: ((entries: IntersectionObserverEntry[]) => void) | undefined;
+		let capturedCallback:
+			| ((entries: IntersectionObserverEntry[]) => void)
+			| undefined;
 
 		vi.stubGlobal(
 			"IntersectionObserver",
-			vi.fn().mockImplementation((cb: (entries: IntersectionObserverEntry[]) => void) => {
-				capturedCallback = cb;
-				return { observe: vi.fn(), disconnect: vi.fn() };
-			}),
+			vi
+				.fn()
+				.mockImplementation(
+					(cb: (entries: IntersectionObserverEntry[]) => void) => {
+						capturedCallback = cb;
+						return { observe: vi.fn(), disconnect: vi.fn() };
+					},
+				),
 		);
 
 		const el = document.createElement("div");
@@ -142,7 +166,10 @@ describe("onIntersection", () => {
 		const disconnectSpy = vi.fn();
 		vi.stubGlobal(
 			"IntersectionObserver",
-			vi.fn().mockImplementation(() => ({ observe: vi.fn(), disconnect: disconnectSpy })),
+			vi.fn().mockImplementation(() => ({
+				observe: vi.fn(),
+				disconnect: disconnectSpy,
+			})),
 		);
 
 		const el = document.createElement("div");
@@ -156,14 +183,19 @@ describe("onIntersection", () => {
 	it("passes options to IntersectionObserver", () => {
 		vi.stubGlobal(
 			"IntersectionObserver",
-			vi.fn().mockImplementation(() => ({ observe: vi.fn(), disconnect: vi.fn() })),
+			vi
+				.fn()
+				.mockImplementation(() => ({ observe: vi.fn(), disconnect: vi.fn() })),
 		);
 
 		const el = document.createElement("div");
 		const options: IntersectionObserverInit = { threshold: 0.5 };
 		onIntersection(el, vi.fn(), options);
 
-		expect(IntersectionObserver).toHaveBeenCalledWith(expect.any(Function), options);
+		expect(IntersectionObserver).toHaveBeenCalledWith(
+			expect.any(Function),
+			options,
+		);
 		vi.unstubAllGlobals();
 	});
 });

@@ -1,6 +1,8 @@
 import { ctx2d } from "./_internal";
 
-export function createCanvasElement(ref?: HTMLImageElement | HTMLVideoElement): HTMLCanvasElement {
+export function createCanvasElement(
+	ref?: HTMLImageElement | HTMLVideoElement,
+): HTMLCanvasElement {
 	const canvas = document.createElement("canvas");
 
 	if (!ref) return canvas;

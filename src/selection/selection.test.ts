@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { clearSelection } from "./clear-selection";
 import { getSelectedText } from "./get-selected-text";
 
@@ -26,7 +26,9 @@ describe("clearSelection", () => {
 
 	it("calls removeAllRanges on the selection", () => {
 		const removeAllRangesSpy = vi.fn();
-		const selectionMock = { removeAllRanges: removeAllRangesSpy } as unknown as Selection;
+		const selectionMock = {
+			removeAllRanges: removeAllRangesSpy,
+		} as unknown as Selection;
 		vi.spyOn(window, "getSelection").mockReturnValue(selectionMock);
 		clearSelection();
 		expect(removeAllRangesSpy).toHaveBeenCalled();

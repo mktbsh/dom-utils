@@ -16,12 +16,22 @@ describe("createCanvasElement", () => {
 
 	it("sets canvas dimensions from an img element's natural size and draws it", () => {
 		const img = document.createElement("img");
-		Object.defineProperty(img, "naturalWidth", { value: 800, configurable: true });
-		Object.defineProperty(img, "naturalHeight", { value: 600, configurable: true });
+		Object.defineProperty(img, "naturalWidth", {
+			value: 800,
+			configurable: true,
+		});
+		Object.defineProperty(img, "naturalHeight", {
+			value: 600,
+			configurable: true,
+		});
 
 		const drawSpy = vi.fn();
-		const ctxMock = { drawImage: drawSpy } as unknown as CanvasRenderingContext2D;
-		vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(ctxMock as never);
+		const ctxMock = {
+			drawImage: drawSpy,
+		} as unknown as CanvasRenderingContext2D;
+		vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
+			ctxMock as never,
+		);
 
 		const canvas = createCanvasElement(img);
 		expect(canvas.width).toBe(800);
@@ -31,12 +41,22 @@ describe("createCanvasElement", () => {
 
 	it("sets canvas dimensions from a video element's video size and draws it", () => {
 		const video = document.createElement("video");
-		Object.defineProperty(video, "videoWidth", { value: 1920, configurable: true });
-		Object.defineProperty(video, "videoHeight", { value: 1080, configurable: true });
+		Object.defineProperty(video, "videoWidth", {
+			value: 1920,
+			configurable: true,
+		});
+		Object.defineProperty(video, "videoHeight", {
+			value: 1080,
+			configurable: true,
+		});
 
 		const drawSpy = vi.fn();
-		const ctxMock = { drawImage: drawSpy } as unknown as CanvasRenderingContext2D;
-		vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(ctxMock as never);
+		const ctxMock = {
+			drawImage: drawSpy,
+		} as unknown as CanvasRenderingContext2D;
+		vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
+			ctxMock as never,
+		);
 
 		const canvas = createCanvasElement(video);
 		expect(canvas.width).toBe(1920);
@@ -46,8 +66,14 @@ describe("createCanvasElement", () => {
 
 	it("handles null context (getContext returns null)", () => {
 		const img = document.createElement("img");
-		Object.defineProperty(img, "naturalWidth", { value: 100, configurable: true });
-		Object.defineProperty(img, "naturalHeight", { value: 100, configurable: true });
+		Object.defineProperty(img, "naturalWidth", {
+			value: 100,
+			configurable: true,
+		});
+		Object.defineProperty(img, "naturalHeight", {
+			value: 100,
+			configurable: true,
+		});
 
 		vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(null);
 

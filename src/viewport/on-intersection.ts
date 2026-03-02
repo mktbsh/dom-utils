@@ -4,7 +4,7 @@ export function onIntersection(
 	options?: IntersectionObserverInit,
 ): () => void {
 	const observer = new IntersectionObserver(
-		(entries) => entries.forEach((entry) => callback(entry)),
+		(entries) => entries.forEach((entry) => void callback(entry)),
 		options,
 	);
 	observer.observe(el);

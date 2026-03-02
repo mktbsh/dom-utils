@@ -27,7 +27,9 @@ describe("once", () => {
 
 		once(el, "click", handler);
 
-		expect(addSpy).toHaveBeenCalledWith("click", expect.any(Function), { once: true });
+		expect(addSpy).toHaveBeenCalledWith("click", expect.any(Function), {
+			once: true,
+		});
 	});
 });
 

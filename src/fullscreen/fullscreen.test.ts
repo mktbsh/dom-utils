@@ -57,12 +57,18 @@ describe("isFullscreen", () => {
 
 	it("returns true when document.fullscreenElement is set", () => {
 		const el = document.createElement("div");
-		Object.defineProperty(document, "fullscreenElement", { value: el, configurable: true });
+		Object.defineProperty(document, "fullscreenElement", {
+			value: el,
+			configurable: true,
+		});
 		expect(isFullscreen()).toBe(true);
 	});
 
 	it("returns false when document.fullscreenElement is null", () => {
-		Object.defineProperty(document, "fullscreenElement", { value: null, configurable: true });
+		Object.defineProperty(document, "fullscreenElement", {
+			value: null,
+			configurable: true,
+		});
 		expect(isFullscreen()).toBe(false);
 	});
 });
@@ -76,12 +82,18 @@ describe("onFullscreenChange", () => {
 		const addSpy = vi.spyOn(document, "addEventListener");
 		const callback = vi.fn();
 		onFullscreenChange(callback);
-		expect(addSpy).toHaveBeenCalledWith("fullscreenchange", expect.any(Function));
+		expect(addSpy).toHaveBeenCalledWith(
+			"fullscreenchange",
+			expect.any(Function),
+		);
 	});
 
 	it("calls callback with true when entering fullscreen", () => {
 		const el = document.createElement("div");
-		Object.defineProperty(document, "fullscreenElement", { value: el, configurable: true });
+		Object.defineProperty(document, "fullscreenElement", {
+			value: el,
+			configurable: true,
+		});
 
 		const callback = vi.fn();
 		onFullscreenChange(callback);
@@ -91,7 +103,10 @@ describe("onFullscreenChange", () => {
 	});
 
 	it("calls callback with false when exiting fullscreen", () => {
-		Object.defineProperty(document, "fullscreenElement", { value: null, configurable: true });
+		Object.defineProperty(document, "fullscreenElement", {
+			value: null,
+			configurable: true,
+		});
 
 		const callback = vi.fn();
 		onFullscreenChange(callback);
@@ -106,7 +121,10 @@ describe("onFullscreenChange", () => {
 		const cleanup = onFullscreenChange(callback);
 		cleanup();
 
-		expect(removeSpy).toHaveBeenCalledWith("fullscreenchange", expect.any(Function));
+		expect(removeSpy).toHaveBeenCalledWith(
+			"fullscreenchange",
+			expect.any(Function),
+		);
 		document.dispatchEvent(new Event("fullscreenchange"));
 		expect(callback).not.toHaveBeenCalled();
 	});

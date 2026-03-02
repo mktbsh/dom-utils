@@ -31,8 +31,14 @@ describe("onNetworkChange", () => {
 	it("adds online and offline event listeners", () => {
 		const callback = vi.fn();
 		onNetworkChange(callback);
-		expect(window.addEventListener).toHaveBeenCalledWith("online", expect.any(Function));
-		expect(window.addEventListener).toHaveBeenCalledWith("offline", expect.any(Function));
+		expect(window.addEventListener).toHaveBeenCalledWith(
+			"online",
+			expect.any(Function),
+		);
+		expect(window.addEventListener).toHaveBeenCalledWith(
+			"offline",
+			expect.any(Function),
+		);
 	});
 
 	it("calls callback with true when online event fires", () => {
@@ -53,7 +59,13 @@ describe("onNetworkChange", () => {
 		const callback = vi.fn();
 		const cleanup = onNetworkChange(callback);
 		cleanup();
-		expect(window.removeEventListener).toHaveBeenCalledWith("online", expect.any(Function));
-		expect(window.removeEventListener).toHaveBeenCalledWith("offline", expect.any(Function));
+		expect(window.removeEventListener).toHaveBeenCalledWith(
+			"online",
+			expect.any(Function),
+		);
+		expect(window.removeEventListener).toHaveBeenCalledWith(
+			"offline",
+			expect.any(Function),
+		);
 	});
 });

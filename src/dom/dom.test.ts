@@ -10,8 +10,12 @@ describe("downloadBlob", () => {
 	});
 
 	it("creates an anchor, clicks it, and revokes the object URL", () => {
-		const createObjectURLSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:test");
-		const revokeObjectURLSpy = vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {});
+		const createObjectURLSpy = vi
+			.spyOn(URL, "createObjectURL")
+			.mockReturnValue("blob:test");
+		const revokeObjectURLSpy = vi
+			.spyOn(URL, "revokeObjectURL")
+			.mockImplementation(() => {});
 
 		const anchor = document.createElement("a");
 		const clickSpy = vi.spyOn(anchor, "click").mockImplementation(() => {});
@@ -46,7 +50,10 @@ describe("getActiveElement", () => {
 	});
 
 	it("returns null when document.activeElement throws", () => {
-		const originalDescriptor = Object.getOwnPropertyDescriptor(Document.prototype, "activeElement");
+		const originalDescriptor = Object.getOwnPropertyDescriptor(
+			Document.prototype,
+			"activeElement",
+		);
 		Object.defineProperty(document, "activeElement", {
 			get() {
 				throw new Error("access denied");
@@ -128,7 +135,10 @@ describe("isVisible", () => {
 			opacity: "1",
 		} as CSSStyleDeclaration);
 		// Stub offsetParent to null to simulate un-laid-out element
-		Object.defineProperty(el, "offsetParent", { value: null, configurable: true });
+		Object.defineProperty(el, "offsetParent", {
+			value: null,
+			configurable: true,
+		});
 		expect(isVisible(el)).toBe(false);
 	});
 });

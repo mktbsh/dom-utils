@@ -29,7 +29,7 @@
     "build": "tsdown",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "check": "@biomejs/biome check --apply ./src/**/*.ts"
+    "check": "biome check --write ./src/**/*.ts"
   },
   "keywords": [
     "dom"
@@ -37,12 +37,12 @@
   "author": "mktbsh",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "@types/node": "^20.11.7",
-    "@vitest/coverage-v8": "^3.0.0",
-    "happy-dom": "^16.0.0",
+    "@biomejs/biome": "2.4.4",
+    "@types/node": "^25.3.3",
+    "@vitest/coverage-v8": "^4.0.18",
+    "happy-dom": "^20.7.0",
     "tsdown": "latest",
-    "typescript": "^5.3.3",
-    "vitest": "^3.0.0"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }
